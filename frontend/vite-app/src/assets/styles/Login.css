@@ -1,0 +1,59 @@
+@import url(./root.css);
+
+.Login {
+  border: 2px solid #353535;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  background-image: linear-gradient(45deg, #2a2a2a, #055566);
+}
+
+input {
+  margin: 10px;
+  outline: none;
+  border: 2px solid black;
+  background-color: aliceblue;
+  width: 400px;
+  height: 25px;
+  transition: 2s ease;
+}
+
+input::placeholder {
+  color: #353535;
+}
+
+.registry > button {
+  position: absolute;
+  transform: translate(150px, 450px);
+  font-size: 2rem;
+  border: 2px solid #707a7d;
+  padding: 5px;
+  width: 200px;
+  border-radius: 20px;
+  color: azure;
+  transition: 2s ease-in-out;
+  background-color: #474747;
+}
+
+.registry > button:hover {
+  background-color: #2a2a2a;
+}
+
+.form-inputs {
+  position: absolute;
+  top: 15px;
+  left: 25px;
+  padding: 10px;
+  border-radius: 20px;
+}
+
+.LogForm {
+  border-radius: 20px;
+  background-image: linear-gradient(-45deg, #2a2a2a, #055566);
+  position: relative;
+  justify-content: center;
+  border: var(--border);
+  width: 500px;
+  height: 650px;
+}

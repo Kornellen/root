@@ -1,0 +1,34 @@
+.Registry {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding: 10px;
+  background-image: linear-gradient(45deg, #2c2c2c, #525252);
+}
+
+.RegForm {
+  border-radius: 20px;
+  background-image: linear-gradient(45deg, #525252, #161616);
+  border: 5px solid #666666;
+  padding: 5px;
+}
+
+input::placeholder {
+  color: #eeeeee;
+}
+
+input[type="submit"] {
+  font-size: 2rem;
+  height: 50px;
+  color: #c9c9c9;
+}
+
+input {
+  color: #eeeeee;
+  background-color: #222222;
+  margin-top: 50px;
+  font-size: 1.5rem;
+  height: 50px;
+  border-radius: 20px;
+  border: 2px solid black;
+}

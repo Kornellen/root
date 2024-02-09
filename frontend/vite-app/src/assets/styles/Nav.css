@@ -1,0 +1,32 @@
+@import "root.css";
+
+nav {
+  background-color: var(--navbgcolor);
+  width: var(--width);
+  border: var(--border);
+}
+
+nav > ul {
+  display: flex;
+  justify-content: end;
+  margin-right: 50px;
+  gap: 10px;
+  list-style-type: none;
+}
+
+a {
+  text-decoration: none;
+  color: var(--font-color);
+}
+
+li:hover {
+  border-radius: 30px;
+  background-color: #656565;
+}
+
+nav > ul > li {
+  transition: 2s ease-out;
+  border-radius: 20px;
+  padding: 10px;
+  border: var(--border);
+}
