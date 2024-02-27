@@ -1,7 +1,7 @@
 import "../assets/styles/Login.css";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Profile from "./Profile";
 
 const Login = () => {
@@ -10,7 +10,20 @@ const Login = () => {
     username: "",
     password: "",
   });
-
+  const username = window.localStorage.getItem("username");
+  useEffect(() => {
+    if (username) {
+      try {
+        const response = axios.post("http://localhost:5175/localLog", username);
+        console.log(response);
+        response ? setLog(true) : setLog(false);
+      } catch (err) {
+        console.log("Error", err);
+      }
+    } else {
+      setLog(false);
+    }
+  }, []);
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -19,7 +32,8 @@ const Login = () => {
         formDatas
       );
 
-      console.log("Server response: ", response.data);
+      window.localStorage.setItem("username", formDatas.username);
+      //console.log("Server response: ", response.data);
 
       if (response.data.info == 200) {
         setLog((current) => !current);

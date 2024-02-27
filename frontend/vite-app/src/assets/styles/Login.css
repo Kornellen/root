@@ -6,7 +6,7 @@
   height: 100%;
   display: flex;
   justify-content: center;
-  background-image: linear-gradient(45deg, #2a2a2a, #055566);
+  background-color: #2a2a2a;
 }
 
 input {
@@ -49,8 +49,9 @@ input::placeholder {
 }
 
 .LogForm {
+  margin: 10px;
   border-radius: 20px;
-  background-image: linear-gradient(-45deg, #2a2a2a, #055566);
+  background-color: #2a2a2a;
   position: relative;
   justify-content: center;
   border: var(--border);
