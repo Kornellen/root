@@ -8,6 +8,12 @@ const port = 5175;
 app.use(express.json());
 app.use(cors());
 
+var con = mysql.createConnection({
+  host: "localhost",
+  user: "root",
+  database: "Profiles",
+});
+
 app.post("/registry", (req, res) => {
   const formDatas = req.body;
   console.log("Datas received:", formDatas);
@@ -15,12 +21,6 @@ app.post("/registry", (req, res) => {
   const username = formDatas.username;
   const email = formDatas.email;
   const password = formDatas.password;
-
-  var con = mysql.createConnection({
-    host: "localhost",
-    user: "root",
-    database: "Profiles",
-  });
 
   con.connect(async (err) => {
     err ? console.log(err) : console.log("connected");
@@ -39,12 +39,6 @@ app.post("/login", (req, res) => {
 
   const username = formDatas.username;
   const password = formDatas.password;
-
-  var con = mysql.createConnection({
-    host: "localhost",
-    user: "root",
-    database: "Profiles",
-  });
 
   con.connect(async (err) => {
     err ? console.log(err) : console.log("connected");
@@ -72,18 +66,11 @@ app.post("/localLog", (req, res) => {
 
   const username = data.username;
 
-  var con = mysql.createConnection({
-    host: "localhost",
-    user: "root",
-    database: "Profiles",
-  });
-
   con.connect(async (err) => {
     err ? console.log(err) : console.log("connected");
-    var sql = "select password from loggins where username = ?;";
+    var sql = "select password from logins where username = ?;";
     con.query(sql, [username], (err, result) => {
       err ? console.log(err) : res.json({ pass: result });
-      console.log(result);
     });
   });
 });

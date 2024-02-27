@@ -1,25 +1,31 @@
-import axios from "axios";
+import "../assets/styles/Profile.css";
 import { useEffect, useState } from "react";
 
 const Profile = () => {
   const [userN, setData] = useState(null);
+  const [time, setTime] = useState("");
 
   useEffect(() => {
-    // const getDatas = async () => {
-    //   try {
-    //     const response = await axios.post("http://localhost:5175/login");
-    //     const result = response.data;
+    const getTimeE = () => {
+      const now = new Date();
+      const hour = now.getHours();
+      const min = now.getMinutes();
+      const sec = now.getSeconds();
 
-    //     console.log(result);
+      const Time = `${hour}:${min}:${sec}`;
 
-    //     await setData(result.login);
-    //   } catch (error) {
-    //     console.error("Error: ", error);
-    //   }
-    // };
+      setTime(() => Time);
+    };
 
-    // getDatas();
+    setInterval(getTimeE, 1000);
+  });
 
+  const handleClick = (event) => {
+    window.localStorage.removeItem("username");
+    window.location.reload();
+  };
+
+  useEffect(() => {
     const getDatasFromLocalStorage = () => {
       setData(() => window.localStorage.getItem("username"));
     };
@@ -30,6 +36,14 @@ const Profile = () => {
   return (
     <div className="Profile">
       <h1>Hello {userN}!</h1>
+
+      <div className="time">{time}</div>
+
+      <div className="log-out">
+        <button onClick={handleClick} className="lgOut-btn">
+          Log Out
+        </button>
+      </div>
     </div>
   );
 };
