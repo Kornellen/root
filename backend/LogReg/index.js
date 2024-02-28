@@ -14,6 +14,10 @@ var con = mysql.createConnection({
   database: "Profiles",
 });
 
+con.connect(async (err) => {
+  err ? console.log(err) : console.log("connected");
+});
+
 app.post("/registry", (req, res) => {
   const formDatas = req.body;
   console.log("Datas received:", formDatas);
@@ -22,13 +26,12 @@ app.post("/registry", (req, res) => {
   const email = formDatas.email;
   const password = formDatas.password;
 
-  con.connect(async (err) => {
-    err ? console.log(err) : console.log("connected");
-    var sql = `insert into logins values ('${username}', '${email}', '${password}')`;
-    await con.query(sql, (err, result) => {
-      err ? console.log(err) : console.log("Inserted!");
-    });
+  err ? console.log(err) : console.log("connected");
+  var sql = `insert into logins values ('${username}', '${email}', '${password}')`;
+  con.query(sql, (err, result) => {
+    err ? console.log(err) : console.log("Inserted!");
   });
+
   res.json({ message: "Success!" });
 });
 
@@ -40,24 +43,21 @@ app.post("/login", (req, res) => {
   const username = formDatas.username;
   const password = formDatas.password;
 
-  con.connect(async (err) => {
-    err ? console.log(err) : console.log("connected");
-    var sql = `select * from logins where username = ? and password = ?`;
-    con.query(sql, [username, password], (err, result) => {
-      //console.log(result);
+  var sql = `select * from logins where username = ? and password = ?`;
+  con.query(sql, [username, password], (err, result) => {
+    //console.log(result);
 
-      if (result.length === 0) {
-        console.log("[ERROR]");
-        res.json({ info: 401 });
-      } else {
-        result.forEach((element) => {
-          /*console.log(
+    if (result.length === 0) {
+      console.log("[ERROR]");
+      res.json({ info: 401 });
+    } else {
+      result.forEach((element) => {
+        /*console.log(
             `Login: ${element.username}, Password: ${element.password}`
           );*/
-          res.json({ info: 200, login: element.username });
-        });
-      }
-    });
+        res.json({ info: 200, login: element.username });
+      });
+    }
   });
 });
 
@@ -66,12 +66,22 @@ app.post("/localLog", (req, res) => {
 
   const username = data.username;
 
-  con.connect(async (err) => {
-    err ? console.log(err) : console.log("connected");
-    var sql = "select password from logins where username = ?;";
-    con.query(sql, [username], (err, result) => {
-      err ? console.log(err) : res.json({ pass: result });
-    });
+  var sql = "select password from logins where username = ?;";
+  con.query(sql, [username], (err, result) => {
+    err ? console.log(err) : res.json({ pass: result });
+  });
+});
+
+app.post("/userdata", (req, res) => {
+  const data = req.body;
+
+  console.log(data);
+  const username = data.username;
+
+  var sql = "SELECT dataType, dataData FROM `userdata` WHERE user = ?;";
+  con.query(sql, [username], async (err, result) => {
+    console.log(result);
+    err ? console.log(err) : await res.json(result);
   });
 });
 

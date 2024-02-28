@@ -15,7 +15,7 @@ const Login = () => {
     if (username) {
       try {
         const response = axios.post("http://localhost:5175/localLog", username);
-        console.log(response);
+        // console.log(response);
         response ? setLog(true) : setLog(false);
       } catch (err) {
         console.log("Error", err);
