@@ -2,6 +2,9 @@ import "../assets/styles/Profile.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { redirectDocument } from "react-router-dom";
+import SettingsView from "../components/SettingsView/SettingsView";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faGear } from "@fortawesome/free-solid-svg-icons";
 
 const Profile = () => {
   const [userN, setData] = useState(null);
@@ -12,6 +15,8 @@ const Profile = () => {
       dataData: null,
     },
   ]);
+  const [view, setView] = useState(false);
+  const [theme, setTheme] = useState(true);
 
   const username = window.localStorage.getItem("username");
   useEffect(() => {
@@ -64,9 +69,17 @@ const Profile = () => {
     };
   }, []);
 
-  const handleClick = (event) => {
+  const handleSettings = (event) => {
+    setView((current) => !current);
+  };
+
+  const handleLogOut = (event) => {
     window.localStorage.removeItem("username");
     window.location.reload();
+  };
+
+  const handleThmeClick = () => {
+    setTheme((current) => !current);
   };
 
   const handleSubmit = () => {};
@@ -82,16 +95,31 @@ const Profile = () => {
   //console.log(userDatas);
 
   return (
-    <div className="Profile">
+    <div className={`profile theme-${theme ? "light" : "dark"}`}>
       <h1>Hello {userN}!</h1>
 
       <div className="time">{time}</div>
 
       <div className="log-out">
-        <button onClick={handleClick} className="lgOut-btn">
+        <button onClick={handleLogOut} className="lgOut-btn">
           Log Out
         </button>
       </div>
+
+      <div className="settings-btn">
+        <button className="btn-setting" onClick={handleSettings}>
+          <FontAwesomeIcon icon={faGear} />
+        </button>
+      </div>
+
+      <div className="theme-btn">
+        <button onClick={handleThmeClick}>Change theme</button>
+      </div>
+
+      <SettingsView
+        class={view}
+        user={window.localStorage.getItem("username")}
+      />
 
       <div className="data-field">
         {/* <div className="form">

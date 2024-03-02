@@ -20,6 +20,26 @@
   transition: 3s linear;
 }
 
+.btn-setting {
+  position: absolute;
+  top: 0;
+  right: 125px;
+  z-index: 2;
+  color: #c1c1c1;
+  font-weight: bold;
+  font-size: 1rem;
+  border: 2px solid #3e3e3e;
+  background-color: #929292;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+@media (prefers-color-scheme: dark) {
+  .btn-setting {
+    background-color: #575757;
+  }
+}
+
 .lgOut-btn:hover {
   border-radius: 40px;
   background-color: #929292;
@@ -36,7 +56,7 @@ h1 {
   border: 2px solid black;
 }
 
-.Profile {
+.profile {
   height: 750px;
   position: relative;
   padding: 10px;
