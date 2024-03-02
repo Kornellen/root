@@ -5,7 +5,7 @@ import axios from "axios";
 const SettingsView = (props) => {
   const [updatedUserDatas, setUUD] = useState({
     newUser: "",
-    oldUser: "",
+    oldUser: props.user,
     newPass: "",
     oldPass: "",
   });
@@ -53,13 +53,9 @@ const SettingsView = (props) => {
       <div className="settingsTable">
         <form action="" onSubmit={handleSubmit}>
           <label htmlFor="newUser">New Username</label>
-          <input type="text" name="newUser" onChange={handleChange} />
-          <br />
-          <br />
-          <label htmlFor="oldUser">Old Username</label>
           <input
             type="text"
-            name="oldUser"
+            name="newUser"
             placeholder={props.user}
             onChange={handleChange}
           />
