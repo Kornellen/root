@@ -51,13 +51,28 @@ const Profile = () => {
       const min = now.getMinutes();
       const sec = now.getSeconds();
       let formattedSec = "";
+      let formattedMin = "";
+      let formattedHour = "";
+
+      if (hour < 10) {
+        formattedHour = `0${hour}`;
+      } else {
+        formattedHour = hour;
+      }
+
+      if (min < 10) {
+        formattedMin = `0${min}`;
+      } else {
+        formattedMin = min;
+      }
+
       if (sec < 10) {
         formattedSec = `0${sec}`;
       } else {
         formattedSec = sec;
       }
 
-      const Time = `${hour}:${min}:${formattedSec}`;
+      const Time = `${formattedHour}:${formattedMin}:${formattedSec}`;
 
       setTime(() => Time);
     };
