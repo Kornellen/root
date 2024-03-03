@@ -1,0 +1,9 @@
+.theme-light {
+  transition: 2s;
+  background-color: #bbbbbb;
+  color: #3e3e3e;
+}
+
+.theme-dark {
+  transition: 2s;
+}

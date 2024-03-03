@@ -1,10 +1,10 @@
 import "../assets/styles/Profile.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { redirectDocument } from "react-router-dom";
 import SettingsView from "../components/SettingsView/SettingsView";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGear } from "@fortawesome/free-solid-svg-icons";
+import { useTheme } from "../Context/Theme";
 
 const Profile = () => {
   const [userN, setData] = useState(null);
@@ -16,8 +16,9 @@ const Profile = () => {
     },
   ]);
   const [view, setView] = useState(false);
-  const [theme, setTheme] = useState(true);
+  //const themeLS = window.localStorage.getItem("theme");
 
+  const { theme } = useTheme();
   const username = window.localStorage.getItem("username");
   useEffect(() => {
     const getDatas = async () => {
@@ -54,23 +55,9 @@ const Profile = () => {
       let formattedMin = "";
       let formattedHour = "";
 
-      if (hour < 10) {
-        formattedHour = `0${hour}`;
-      } else {
-        formattedHour = hour;
-      }
-
-      if (min < 10) {
-        formattedMin = `0${min}`;
-      } else {
-        formattedMin = min;
-      }
-
-      if (sec < 10) {
-        formattedSec = `0${sec}`;
-      } else {
-        formattedSec = sec;
-      }
+      hour < 10 ? (formattedHour = `0${hour}`) : (formattedHour = hour);
+      min < 10 ? (formattedMin = `0${min}`) : (formattedMin = min);
+      sec < 10 ? (formattedSec = `0${sec}`) : (formattedSec = sec);
 
       const Time = `${formattedHour}:${formattedMin}:${formattedSec}`;
 
@@ -92,13 +79,6 @@ const Profile = () => {
     window.localStorage.removeItem("username");
     window.location.reload();
   };
-
-  const handleThmeClick = () => {
-    setTheme((current) => !current);
-  };
-
-  const handleSubmit = () => {};
-
   useEffect(() => {
     const getDatasFromLocalStorage = () => {
       setData(() => window.localStorage.getItem("username"));
@@ -107,10 +87,8 @@ const Profile = () => {
     getDatasFromLocalStorage();
   }, []);
 
-  //console.log(userDatas);
-
   return (
-    <div className={`profile theme-${theme ? "light" : "dark"}`}>
+    <div className={`profile theme-${theme}`}>
       <h1>Hello {userN}!</h1>
 
       <div className="time">{time}</div>
@@ -127,32 +105,12 @@ const Profile = () => {
         </button>
       </div>
 
-      <div className="theme-btn">
-        <button onClick={handleThmeClick}>Change theme</button>
-      </div>
-
       <SettingsView
         class={view}
         user={window.localStorage.getItem("username")}
       />
 
       <div className="data-field">
-        {/* <div className="form">
-          <form onSubmit={handleSubmit}>
-            <fieldset>
-              <input type="text" name="" id="" />
-              <br />
-              <input type="text" name="" id="" />
-              <br />
-              <input type="text" name="" id="" />
-              <br />
-              <input type="text" name="" id="" />
-              <br />
-              <label htmlFor="newletter">Newsletter</label>
-              <input type="checkbox" name="newsletter" id="" />
-            </fieldset>
-          </form>
-        </div> */}
         {userDatas && (
           <div className="data-outputs">
             {userDatas.map((element, index) => {

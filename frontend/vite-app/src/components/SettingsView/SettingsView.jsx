@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import "../../assets/styles/SettingsView.css";
 import axios from "axios";
+import { useTheme } from "../../Context/Theme";
 
 const SettingsView = (props) => {
   const [updatedUserDatas, setUUD] = useState({
@@ -10,19 +11,7 @@ const SettingsView = (props) => {
     oldPass: "",
   });
 
-  // useEffect(() => {
-  //   const getSettings = async () => {
-  //     try {
-  //       const response = await axios.post("http://localhost:5175/updateUser", {
-  //         username: props.user,
-  //       });
-  //     } catch (err) {
-  //       console.log(err);
-  //     }
-  //   };
-
-  //   getSettings();
-  // }, [props.user]);
+  const { theme } = useTheme();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -49,7 +38,9 @@ const SettingsView = (props) => {
   };
 
   return (
-    <div className={`settings ${props.class ? "show" : "hidden"}`}>
+    <div
+      className={`settings ${props.class ? "show" : "hidden"} theme-${theme}`}
+    >
       <div className="settingsTable">
         <form action="" onSubmit={handleSubmit}>
           <label htmlFor="newUser">New Username</label>
