@@ -1,12 +1,15 @@
 import { useState } from "react";
 import axios from "axios";
 import "../assets/styles/Registry.css";
+import { useNavigate } from "react-router-dom";
 
 const Registry = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     username: "",
     email: "",
     password: "",
+    uid: 0,
   });
 
   const handleChange = (e) => {
@@ -17,7 +20,10 @@ const Registry = () => {
   };
 
   const handleSubmit = async (e) => {
+    const UserID = Math.floor(Math.random() * 100000000);
+
     if (e.target.password.value == e.target.passwordr.value) {
+      formData.uid = UserID;
       e.preventDefault();
       localStorage.setItem(e.target.name, e.target.value);
       try {
@@ -26,6 +32,9 @@ const Registry = () => {
           formData
         );
         console.log("Server response: ", response.data.message);
+        if (response.data.message === "Success!") {
+          navigate("/login");
+        }
       } catch (error) {
         console.error("Error: ", error);
       }

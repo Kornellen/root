@@ -1,12 +1,17 @@
 import "../assets/styles/Profile.css";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import SettingsView from "../components/SettingsView/SettingsView";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGear } from "@fortawesome/free-solid-svg-icons";
 import { useTheme } from "../Context/Theme";
+import { useLogged } from "../Context/User";
+import { useNavigate } from "react-router-dom";
 
 const Profile = () => {
+  const navigate = useNavigate();
+  const isMounted = useRef(true);
+  const { user, logOut, logIn } = useLogged();
   const [userN, setData] = useState(null);
   const [time, setTime] = useState("");
   const [userDatas, setUsersDatas] = useState([
@@ -16,15 +21,14 @@ const Profile = () => {
     },
   ]);
   const [view, setView] = useState(false);
-  //const themeLS = window.localStorage.getItem("theme");
 
   const { theme } = useTheme();
-  const username = window.localStorage.getItem("username");
+  const uid = window.localStorage.getItem("userid");
   useEffect(() => {
     const getDatas = async () => {
       try {
         const response = await axios.post("http://localhost:5175/userdata", {
-          username: username,
+          userID: uid,
         });
 
         const data = await response.data.map((element) => ({
@@ -41,9 +45,9 @@ const Profile = () => {
 
     getDatas();
 
-    console.log("Bye");
-    console.log(userDatas);
-  }, [username]);
+    // console.log("Bye");
+    // console.log(userDatas);
+  }, [uid]);
 
   useEffect(() => {
     const getTimeE = () => {
@@ -75,9 +79,12 @@ const Profile = () => {
     setView((current) => !current);
   };
 
-  const handleLogOut = (event) => {
-    window.localStorage.removeItem("username");
-    window.location.reload();
+  const handleLogOut = async (event) => {
+    console.log("logged out");
+    logOut();
+    window.localStorage.setItem("userid", null);
+
+    navigate("/login");
   };
   useEffect(() => {
     const getDatasFromLocalStorage = () => {
@@ -87,43 +94,70 @@ const Profile = () => {
     getDatasFromLocalStorage();
   }, []);
 
-  return (
-    <div className={`profile theme-${theme}`}>
-      <h1>Hello {userN}!</h1>
+  useEffect(() => {
+    const fetchD = async () => {
+      try {
+        const response = await axios.post(
+          "http://localhost:5175/uidtousername",
+          {
+            userID: uid,
+          }
+        );
 
-      <div className="time">{time}</div>
+        if (isMounted.current) {
+          const data = await response.data[0]?.username;
+          data ? await setData(data) : navigate("/login");
+        }
 
-      <div className="log-out">
-        <button onClick={handleLogOut} className="lgOut-btn">
-          Log Out
-        </button>
+        console.log(response);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchD();
+  }, []);
+
+  return userN ? (
+    userN && (
+      <div className={`profile theme-${theme}`}>
+        <h1>Hello {userN}!</h1>
+
+        <div className="time">{time}</div>
+
+        <div className="log-out">
+          <button onClick={handleLogOut} className="lgOut-btn">
+            Log Out
+          </button>
+        </div>
+
+        <div className="settings-btn">
+          <button className="btn-setting" onClick={handleSettings}>
+            <FontAwesomeIcon icon={faGear} />
+          </button>
+        </div>
+
+        <SettingsView
+          class={view}
+          user={window.localStorage.getItem("username")}
+        />
+
+        {/* <div className="data-field">
+          {userDatas && (
+            <div className="data-outputs">
+              {userDatas.map((element, index) => {
+                return (
+                  <p key={index}>
+                    Data Type: {element.dataType}, Data: {element.dataData}
+                  </p>
+                );
+              })}
+            </div>
+          )}
+        </div> */}
       </div>
-
-      <div className="settings-btn">
-        <button className="btn-setting" onClick={handleSettings}>
-          <FontAwesomeIcon icon={faGear} />
-        </button>
-      </div>
-
-      <SettingsView
-        class={view}
-        user={window.localStorage.getItem("username")}
-      />
-
-      <div className="data-field">
-        {userDatas && (
-          <div className="data-outputs">
-            {userDatas.map((element, index) => {
-              return (
-                <p key={index}>
-                  Data Type: {element.dataType}, Data: {element.dataData}
-                </p>
-              );
-            })}
-          </div>
-        )}
-      </div>
-    </div>
+    )
+  ) : (
+    <h1 className={`theme-${theme}`}>Loading...</h1>
   );
 };
 

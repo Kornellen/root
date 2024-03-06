@@ -5,12 +5,13 @@ import { useEffect, useState } from "react";
 import Profile from "./Profile";
 
 const Login = () => {
+  const navigate = useNavigate();
   const [log, setLog] = useState(false);
   const [formDatas, setFormDatas] = useState({
     username: "",
     password: "",
   });
-  const username = window.localStorage.getItem("username");
+  const username = window.localStorage.getItem("userid");
   useEffect(() => {
     if (username) {
       try {
@@ -32,17 +33,30 @@ const Login = () => {
         formDatas
       );
 
-      window.localStorage.setItem("username", formDatas.username);
       //console.log("Server response: ", response.data);
 
       if (response.data.info == 200) {
         setLog((current) => !current);
+        new Promise((resolve) => setTimeout(() => navigate("/dashboard"), 100));
       }
       if (response.data.info == "401") {
         setLog((current) => current);
       }
     } catch (error) {
       console.error(error);
+    }
+
+    try {
+      console.log(formDatas.username);
+      const response2 = await axios.post(
+        "http://localhost:5175/usernametouid",
+        formDatas
+      );
+      const data = await response2.data[0].userID;
+      console.log(data);
+      window.localStorage.setItem("userid", data);
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -53,10 +67,7 @@ const Login = () => {
     });
   };
 
-  const navigate = useNavigate();
-  return log ? (
-    <Profile />
-  ) : (
+  return (
     <div className="Login">
       <form action="" onSubmit={handleSubmit} className="LogForm">
         <div className="form-inputs">

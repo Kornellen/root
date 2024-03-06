@@ -2,9 +2,11 @@ import { useEffect, useState } from "react";
 import "../../assets/styles/Nav.css";
 import { Outlet, Link } from "react-router-dom";
 import { useTheme } from "../../Context/Theme";
+import { useLogged } from "../../Context/User";
 
 const Nav = () => {
   const { theme } = useTheme();
+  const uid = useLogged();
 
   return (
     <>
@@ -17,7 +19,7 @@ const Nav = () => {
             <Link to="/about">About</Link>
           </li>
           <li>
-            <Link to="/profile">Profile</Link>
+            <Link to={uid ? "dashboard" : "login"}>Profile</Link>
           </li>
         </ul>
       </nav>

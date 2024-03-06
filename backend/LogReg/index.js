@@ -25,9 +25,8 @@ app.post("/registry", (req, res) => {
   const username = formDatas.username;
   const email = formDatas.email;
   const password = formDatas.password;
-
-  err ? console.log(err) : console.log("connected");
-  var sql = `insert into logins values ('${username}', '${email}', '${password}')`;
+  const uid = formDatas.uid;
+  var sql = `insert into logins values (${uid},'${username}', '${email}', '${password}')`;
   con.query(sql, (err, result) => {
     err ? console.log(err) : console.log("Inserted!");
   });
@@ -76,10 +75,10 @@ app.post("/userdata", (req, res) => {
   const data = req.body;
 
   console.log(data);
-  const username = data.username;
+  const username = data.userID;
 
   var sql =
-    "SELECT dataType, dataData FROM `userdata` WHERE user = ? and dataType not in ('config');";
+    "SELECT dataType, dataData FROM `userdata` WHERE userID = ? and dataType not in ('config');";
   con.query(sql, [username], async (err, result) => {
     console.log(result);
     err ? console.log(err) : await res.json(result);
@@ -129,9 +128,27 @@ app.post("/updateuser", (req, res) => {
     var sql2 = "UPDATE `userdata` SET `user`= ? WHERE user = ?;";
 
     con.query(sql2, [newUser, oldUser], (err, result) => {
-      err ? console.error(err) : console.log(result);
+      err ? console.error(err) : result;
     });
   }
+});
+
+app.post("/usernametouid", (req, res) => {
+  const username = req.body.username;
+
+  var sql = "select userID from `logins` where username = ?;";
+  con.query(sql, [username], (err, result) => {
+    err ? console.error(err) : res.json(result);
+  });
+});
+
+app.post("/uidtousername", (req, res) => {
+  const uid = req.body.userID;
+
+  var sql = "select username from `logins` where userID = ?;";
+  con.query(sql, [uid], (err, result) => {
+    err ? console.error(err) : res.json(result);
+  });
 });
 
 app.listen(port, () => {

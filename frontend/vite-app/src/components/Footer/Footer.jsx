@@ -1,11 +1,13 @@
 import { useNavigate } from "react-router-dom";
 import { Outlet, Link } from "react-router-dom";
 import "../../assets/styles/Footer.css";
+import { useTheme } from "../../Context/Theme";
 
 const Footer = () => {
+  const { theme } = useTheme();
   return (
     <>
-      <footer>
+      <footer className={`footer theme-${theme}`}>
         <p>Footer</p>
         <div className="footer-nav">
           <ul>
