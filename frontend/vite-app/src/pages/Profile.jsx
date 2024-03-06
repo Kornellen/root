@@ -136,10 +136,7 @@ const Profile = () => {
           </button>
         </div>
 
-        <SettingsView
-          class={view}
-          user={window.localStorage.getItem("username")}
-        />
+        <SettingsView class={view} user={userN} />
 
         {/* <div className="data-field">
           {userDatas && (
