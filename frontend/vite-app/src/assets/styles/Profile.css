@@ -34,12 +34,6 @@
   border-radius: 10px;
 }
 
-@media (prefers-color-scheme: dark) {
-  .btn-setting {
-    background-color: #575757;
-  }
-}
-
 .lgOut-btn:hover {
   border-radius: 40px;
   background-color: #929292;

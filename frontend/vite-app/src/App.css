@@ -4,6 +4,17 @@
   color: #3e3e3e;
 }
 
+a {
+  color: #3e3e3e;
+  text-decoration: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  a {
+    color: #bbbbbb;
+  }
+}
 .theme-dark {
   transition: 2s;
+  color: #bbbbbb;
 }

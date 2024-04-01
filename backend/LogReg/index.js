@@ -1,12 +1,17 @@
 const express = require("express");
 const cors = require("cors");
 const mysql = require("mysql");
+const { createHash } = require("crypto");
 
 const app = express();
 const port = 5175;
 
 app.use(express.json());
 app.use(cors());
+
+const hash = (str) => {
+  return createHash("sha256").update(str).digest("hex");
+};
 
 var con = mysql.createConnection({
   host: "localhost",
@@ -20,74 +25,62 @@ con.connect(async (err) => {
 
 app.post("/registry", (req, res) => {
   const formDatas = req.body;
-  console.log("Datas received:", formDatas);
 
   const username = formDatas.username;
   const email = formDatas.email;
-  const password = formDatas.password;
+  const password = hash(formDatas.password);
   const uid = formDatas.uid;
-  var sql = `insert into logins values (${uid},'${username}', '${email}', '${password}')`;
-  con.query(sql, (err, result) => {
-    err ? console.log(err) : console.log("Inserted!");
-  });
+  var sql = `insert into logins values (?, ?, ?, ?)`;
 
-  res.json({ message: "Success!" });
+  con.query(sql, [uid, username, email, password], (err, result) => {
+    err ? console.log(err) : res.json({ message: "Success!" });
+  });
 });
 
 app.post("/login", (req, res) => {
   const formDatas = req.body;
 
-  console.log(formDatas);
-
   const username = formDatas.username;
-  const password = formDatas.password;
+  const password = hash(formDatas.password);
 
-  var sql = `select * from logins where username = ? and password = ?`;
-  con.query(sql, [username, password], (err, result) => {
-    //console.log(result);
+  var sql = `select password from logins where username = ?`;
+  var dbHash = "";
 
+  con.query(sql, [username], (err, result) => {
     if (result.length === 0) {
-      console.log("[ERROR]");
+      console.log("[ERROR] Uzytkownik nie istnieje");
       res.json({ info: 401 });
     } else {
-      result.forEach((element) => {
-        /*console.log(
-            `Login: ${element.username}, Password: ${element.password}`
-          );*/
-        res.json({ info: 200, login: element.username });
-      });
+      dbHash = `${result[0].password}`;
+
+      if (password === dbHash) {
+        console.log("[INFO]: Sukces");
+        return res.json({ info: 200, login: username });
+      } else {
+        console.log("[ERROR]: Hasla nie takie same");
+        return res.json({ info: 401 });
+      }
     }
   });
 });
 
-app.post("/localLog", (req, res) => {
-  const data = req.body;
+// app.post("/userdata", (req, res) => {
+//   const data = req.body;
 
-  const username = data.username;
+//   console.log(data);
+//   const username = data.userID;
 
-  var sql = "select password from logins where username = ?;";
-  con.query(sql, [username], (err, result) => {
-    err ? console.log(err) : res.json({ pass: result });
-  });
-});
-
-app.post("/userdata", (req, res) => {
-  const data = req.body;
-
-  console.log(data);
-  const username = data.userID;
-
-  var sql =
-    "SELECT dataType, dataData FROM `userdata` WHERE userID = ? and dataType not in ('config');";
-  con.query(sql, [username], async (err, result) => {
-    console.log(result);
-    err ? console.log(err) : await res.json(result);
-  });
-});
+//   var sql =
+//     "SELECT dataType, dataData FROM `userdata` WHERE userID = ? and dataType not in ('config');";
+//   con.query(sql, [username], async (err, result) => {
+//     console.log(result);
+//     err ? console.log(err) : await res.json(result);
+//   });
+// });
 
 app.post("/updateuser", (req, res) => {
   const data = req.body;
-  console.log(data);
+
   const newUser = data.newUser;
   const oldUser = data.oldUser;
   const newPassword = data.newPass;
@@ -135,9 +128,11 @@ app.post("/updateuser", (req, res) => {
 
 app.post("/usernametouid", (req, res) => {
   const username = req.body.username;
+  const password = hash(req.body.password);
 
-  var sql = "select userID from `logins` where username = ?;";
-  con.query(sql, [username], (err, result) => {
+  var sql = "select userID from `logins` where username = ? and password = ?";
+
+  con.query(sql, [username, password], (err, result) => {
     err ? console.error(err) : res.json(result);
   });
 });

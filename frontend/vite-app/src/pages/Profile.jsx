@@ -24,30 +24,30 @@ const Profile = () => {
 
   const { theme } = useTheme();
   const uid = window.localStorage.getItem("userid");
-  useEffect(() => {
-    const getDatas = async () => {
-      try {
-        const response = await axios.post("http://localhost:5175/userdata", {
-          userID: uid,
-        });
+  // useEffect(() => {
+  //   const getDatas = async () => {
+  //     try {
+  //       const response = await axios.post("http://localhost:5175/userdata", {
+  //         userID: uid,
+  //       });
 
-        const data = await response.data.map((element) => ({
-          dataType: element.dataType,
-          dataData: element.dataData,
-        }));
+  //       const data = await response.data.map((element) => ({
+  //         dataType: element.dataType,
+  //         dataData: element.dataData,
+  //       }));
 
-        console.log(data);
-        setUsersDatas(data);
-      } catch (err) {
-        console.log(err);
-      }
-    };
+  //       //console.log(data);
+  //       setUsersDatas(data);
+  //     } catch (err) {
+  //       console.log(err);
+  //     }
+  //   };
 
-    getDatas();
+  //   getDatas();
 
-    // console.log("Bye");
-    // console.log(userDatas);
-  }, [uid]);
+  //   // console.log("Bye");
+  //   // console.log(userDatas);
+  // }, [uid]);
 
   useEffect(() => {
     const getTimeE = () => {
@@ -80,9 +80,9 @@ const Profile = () => {
   };
 
   const handleLogOut = async (event) => {
-    console.log("logged out");
+    //console.log("logged out");
     logOut();
-    window.localStorage.setItem("userid", null);
+    window.localStorage.setItem("userid", "");
 
     navigate("/login");
   };
@@ -109,7 +109,7 @@ const Profile = () => {
           data ? await setData(data) : navigate("/login");
         }
 
-        console.log(response);
+        //console.log(response);
       } catch (error) {
         console.log(error);
       }
