@@ -27,6 +27,17 @@ input::placeholder {
   color: #353535;
 }
 
+.err {
+  color: #dc2020;
+  text-align: center;
+  position: absolute;
+  bottom: 10px;
+  right: 40px;
+  border: 2px dashed;
+  padding: 10px;
+  width: 400px;
+}
+
 .registry > button {
   position: absolute;
   transform: translate(150px, 450px);

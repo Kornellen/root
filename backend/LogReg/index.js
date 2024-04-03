@@ -50,7 +50,7 @@ app.post("/login", (req, res) => {
   con.query(sql, [username], (err, result) => {
     if (result.length === 0) {
       console.log("[ERROR] Uzytkownik nie istnieje");
-      res.json({ info: 401 });
+      res.json({ info: 401, err: "User doesn't exist" });
     } else {
       dbHash = `${result[0].password}`;
 
@@ -59,7 +59,7 @@ app.post("/login", (req, res) => {
         return res.json({ info: 200, login: username });
       } else {
         console.log("[ERROR]: Hasla nie takie same");
-        return res.json({ info: 401 });
+        return res.json({ info: 401, err: "Incorrect Password" });
       }
     }
   });

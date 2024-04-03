@@ -3,11 +3,13 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useTheme } from "../Context/Theme";
+import ErrInf from "../components/ErrInfo/ErrInfo";
 
 const Login = () => {
   let err = false;
   const { theme } = useTheme();
   const navigate = useNavigate();
+  const [errType, setErrType] = useState("");
   const [log, setLog] = useState(false);
   const [formDatas, setFormDatas] = useState({
     username: "",
@@ -59,6 +61,9 @@ const Login = () => {
               }, 100)
             );
           } else {
+            const err = response.data.err;
+            console.log(err);
+            setErrType(err);
             setLog(false);
           }
         }
@@ -136,6 +141,11 @@ const Login = () => {
             Registry
           </button>
         </div>
+        {errType && (
+          <div className="err">
+            <ErrInf err={errType} />
+          </div>
+        )}
       </form>
     </div>
   );
