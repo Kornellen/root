@@ -1,3 +1,7 @@
+body {
+  overflow-x: hidden;
+}
+
 .theme-light {
   transition: 2s;
   background-color: #bbbbbb;

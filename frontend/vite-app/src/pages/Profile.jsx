@@ -1,6 +1,7 @@
 import "../assets/styles/Profile.css";
 import { useEffect, useState, useRef } from "react";
 import axios from "axios";
+import UserDatasView from "../components/UserDatasView/UserDatasView";
 import SettingsView from "../components/SettingsView/SettingsView";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGear } from "@fortawesome/free-solid-svg-icons";
@@ -24,30 +25,6 @@ const Profile = () => {
 
   const { theme } = useTheme();
   const uid = window.localStorage.getItem("userid");
-  // useEffect(() => {
-  //   const getDatas = async () => {
-  //     try {
-  //       const response = await axios.post("http://localhost:5175/userdata", {
-  //         userID: uid,
-  //       });
-
-  //       const data = await response.data.map((element) => ({
-  //         dataType: element.dataType,
-  //         dataData: element.dataData,
-  //       }));
-
-  //       //console.log(data);
-  //       setUsersDatas(data);
-  //     } catch (err) {
-  //       console.log(err);
-  //     }
-  //   };
-
-  //   getDatas();
-
-  //   // console.log("Bye");
-  //   // console.log(userDatas);
-  // }, [uid]);
 
   useEffect(() => {
     const getTimeE = () => {
@@ -121,36 +98,19 @@ const Profile = () => {
     userN && (
       <div className={`profile theme-${theme}`}>
         <h1>Hello {userN}!</h1>
-
         <div className="time">{time}</div>
-
         <div className="log-out">
           <button onClick={handleLogOut} className="lgOut-btn">
             Log Out
           </button>
         </div>
-
         <div className="settings-btn">
           <button className="btn-setting" onClick={handleSettings}>
             <FontAwesomeIcon icon={faGear} />
           </button>
         </div>
-
         <SettingsView class={view} user={userN} />
-
-        {/* <div className="data-field">
-          {userDatas && (
-            <div className="data-outputs">
-              {userDatas.map((element, index) => {
-                return (
-                  <p key={index}>
-                    Data Type: {element.dataType}, Data: {element.dataData}
-                  </p>
-                );
-              })}
-            </div>
-          )}
-        </div> */}
+        <UserDatasView />
       </div>
     )
   ) : (

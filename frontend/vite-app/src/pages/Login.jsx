@@ -67,7 +67,6 @@ const Login = () => {
       }
 
       try {
-        //console.log(formDatas.username);
         const response2 = await axios.post(
           "http://localhost:5175/usernametouid",
           formDatas
@@ -77,7 +76,7 @@ const Login = () => {
           err = true;
         } else {
           const data = await response2.data[0].userID;
-          //console.log(data);
+
           window.localStorage.setItem("userid", data);
         }
       } catch (error) {

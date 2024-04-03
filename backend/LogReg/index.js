@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const mysql = require("mysql");
 const { createHash } = require("crypto");
+const { log } = require("console");
 
 const app = express();
 const port = 5175;
@@ -64,36 +65,50 @@ app.post("/login", (req, res) => {
   });
 });
 
-// app.post("/userdata", (req, res) => {
-//   const data = req.body;
+app.post("/userdata", (req, res) => {
+  const data = req.body;
 
-//   console.log(data);
-//   const username = data.userID;
+  console.log(data);
+  const uid = data.uid;
 
-//   var sql =
-//     "SELECT dataType, dataData FROM `userdata` WHERE userID = ? and dataType not in ('config');";
-//   con.query(sql, [username], async (err, result) => {
-//     console.log(result);
-//     err ? console.log(err) : await res.json(result);
-//   });
-// });
+  var sql =
+    "SELECT dataType, dataData FROM `userdata` WHERE userID = ? and dataType not in ('config');";
+  con.query(sql, [uid], async (err, result) => {
+    console.log(result);
+    err ? console.log(err) : await res.json(result);
+  });
+});
+
+app.post("/adddata", (req, res) => {
+  const data = req.body;
+  console.log(data);
+
+  const dataType = data.dataType;
+  const datA = data.data;
+  const uid = data.uid;
+
+  var sql =
+    "insert into userdata (userID, dataType, dataData) values (?, ?, ?)";
+
+  con.query(sql, [uid, dataType, datA], (err, result) => {
+    err ? res.json({ info: "err" }) : res.json({ info: "succes" });
+  });
+});
 
 app.post("/updateuser", (req, res) => {
   const data = req.body;
 
   const newUser = data.newUser;
   const oldUser = data.oldUser;
-  const newPassword = data.newPass;
-  const oldPassword = data.oldPass;
-
-  console.log(newUser, oldUser, newPassword, oldPassword);
+  const newPassword = hash(data.newPass);
+  const oldPassword = hash(data.oldPass);
 
   if (newUser.length === 0) {
     var sql =
       "update `logins` set `password` = ? where `username` = ? and `password` = ?;";
 
     con.query(sql, [newPassword, oldUser, oldPassword], (err, result) => {
-      err ? console.error(err) : console.log(result);
+      err ? console.error(err) : console.log("[INFO]: Success");
     });
   }
 
@@ -101,28 +116,17 @@ app.post("/updateuser", (req, res) => {
     var sql =
       "update `logins` set `username` = ? where `username` = ? and `password` = ?;";
     con.query(sql, [newUser, oldUser, oldPassword], (err, result) =>
-      err ? console.error(err) : console.log(result)
+      err ? console.error(err) : console.log("[INFO]: Success")
     );
-
-    var sql2 = "UPDATE `userdata` SET `user`= ? WHERE user = ?;";
-
-    con.query(sql2, [newUser, oldUser], (err, result) => {
-      err ? console.error(err) : console.log(result);
-    });
   } else {
     var sql =
       "update `logins` set `username` = ?, `password` = ? where `username` = ? and `password` = ?;";
     con.query(
       sql,
       [newUser, newPassword, oldUser, oldPassword],
-      (err, result) => (err ? console.error(err) : console.log(result))
+      (err, result) =>
+        err ? console.error(err) : console.log("[INFO]: Success")
     );
-
-    var sql2 = "UPDATE `userdata` SET `user`= ? WHERE user = ?;";
-
-    con.query(sql2, [newUser, oldUser], (err, result) => {
-      err ? console.error(err) : result;
-    });
   }
 });
 
