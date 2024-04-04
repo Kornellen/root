@@ -12,22 +12,33 @@ const Footer = () => {
         <div className="footer-nav">
           <ul>
             <li>
-              <Link to="/">Home</Link>
+              <Link to="/" className={`theme-${theme}`}>
+                Home
+              </Link>
             </li>
             <li>
-              <Link to="/about">About</Link>
+              <Link to="/about" className={`theme-${theme}`}>
+                About
+              </Link>
             </li>
             <li>
-              <Link to="/profile">Login</Link>
+              <Link to="/login" className={`theme-${theme}`}>
+                Login
+              </Link>
             </li>
             <li>
-              <Link to="/registry">Registry</Link>
+              <Link to="/registry" className={`theme-${theme}`}>
+                Registry
+              </Link>
             </li>
           </ul>
         </div>
 
         <div className="contact">
-          <a href="mailto:testserverow9@gmail.com" className="email-to-author">
+          <a
+            href="mailto:testserverow9@gmail.com"
+            className={`email-to-author theme-${theme}`}
+          >
             Email to author
           </a>
         </div>

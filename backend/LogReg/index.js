@@ -49,16 +49,13 @@ app.post("/login", (req, res) => {
 
   con.query(sql, [username], (err, result) => {
     if (result.length === 0) {
-      console.log("[ERROR] Uzytkownik nie istnieje");
       res.json({ info: 401, err: "User doesn't exist" });
     } else {
       dbHash = `${result[0].password}`;
 
       if (password === dbHash) {
-        console.log("[INFO]: Sukces");
         return res.json({ info: 200, login: username });
       } else {
-        console.log("[ERROR]: Hasla nie takie same");
         return res.json({ info: 401, err: "Incorrect Password" });
       }
     }
@@ -68,20 +65,17 @@ app.post("/login", (req, res) => {
 app.post("/userdata", (req, res) => {
   const data = req.body;
 
-  console.log(data);
   const uid = data.uid;
 
   var sql =
     "SELECT dataType, dataData FROM `userdata` WHERE userID = ? and dataType not in ('config');";
   con.query(sql, [uid], async (err, result) => {
-    console.log(result);
     err ? console.log(err) : await res.json(result);
   });
 });
 
 app.post("/adddata", (req, res) => {
   const data = req.body;
-  console.log(data);
 
   const dataType = data.dataType;
   const datA = data.data;

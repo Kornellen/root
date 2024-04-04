@@ -25,8 +25,6 @@ const Login = () => {
   }, []);
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Subimitted");
-    console.log(err);
 
     if (formDatas.password === "" || formDatas.username === "") {
       err = true;

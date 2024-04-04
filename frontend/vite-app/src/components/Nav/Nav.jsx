@@ -13,13 +13,19 @@ const Nav = () => {
       <nav className={`theme-${theme}`}>
         <ul>
           <li>
-            <Link to="/">Home</Link>
+            <Link to="/" className={`theme-${theme}`}>
+              Home
+            </Link>
           </li>
           <li>
-            <Link to="/about">About</Link>
+            <Link to="/about" className={`theme-${theme}`}>
+              About
+            </Link>
           </li>
           <li>
-            <Link to={uid ? "dashboard" : "login"}>Profile</Link>
+            <Link to={uid ? "dashboard" : "login"} className={`theme-${theme}`}>
+              Profile
+            </Link>
           </li>
         </ul>
       </nav>

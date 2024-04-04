@@ -5,7 +5,7 @@ import axios from "axios";
 const UserDatasView = () => {
   const [data, setData] = useState(null);
   const [addData, setAddData] = useState({
-    dataType: null,
+    dataType: "other",
     data: null,
     uid: null,
   });
@@ -52,9 +52,9 @@ const UserDatasView = () => {
           <div className="datas">
             {data.map((element, index) => {
               return (
-                <div className="data">
-                  <p key={index}>Data Type: {element.dataType}</p>
-                  <p key={index}>Data: {element.data}</p>
+                <div className="data" key={index}>
+                  <p>Data Type: {element.dataType}</p>
+                  <p>Data: {element.data}</p>
                 </div>
               );
             })}
@@ -62,23 +62,21 @@ const UserDatasView = () => {
         </div>
       )}
 
-      <form onSubmit={handleSubmit}>
-        <fieldset>
-          <label htmlFor="datatype">Data Type: </label>
-          <select
-            name="dataType"
-            value={addData.dataType}
-            onChange={handleChange}
-          >
-            <option value="other">other</option>
-            <option value="userData">userData</option>
-          </select>
-          <br />
-          <label htmlFor="data">Data</label>
-          <input type="text" name="data" onChange={handleChange} />
-          <br />
-          <input type="submit" value="Add data" />
-        </fieldset>
+      <form onSubmit={handleSubmit} className="add-data">
+        <label htmlFor="datatype">Data Type: </label>
+        <select
+          name="dataType"
+          value={addData.dataType}
+          onChange={handleChange}
+        >
+          <option value="other">other</option>
+          <option value="userData">userData</option>
+        </select>
+        <br />
+        <label htmlFor="data">Data</label>
+        <input type="text" name="data" onChange={handleChange} />
+        <br />
+        <input type="submit" value="Add data" />
       </form>
     </div>
   );

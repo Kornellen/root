@@ -57,7 +57,6 @@ const Profile = () => {
   };
 
   const handleLogOut = async (event) => {
-    //console.log("logged out");
     logOut();
     window.localStorage.setItem("userid", "");
 
@@ -85,8 +84,6 @@ const Profile = () => {
           const data = await response.data[0]?.username;
           data ? await setData(data) : navigate("/login");
         }
-
-        //console.log(response);
       } catch (error) {
         console.log(error);
       }

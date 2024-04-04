@@ -9,7 +9,16 @@
   overflow-y: auto;
   float: left;
   width: 50%;
+  height: 510px;
+}
+
+.add-data {
+  float: left;
+  width: 47%;
   height: 500px;
+  margin-left: 10px;
+  padding: 10px;
+  border: 1px solid #8e8e8e;
 }
 
 select {

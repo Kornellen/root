@@ -4,21 +4,23 @@ use Profiles;
 
 create table logins (
     userID int primary key,
-    username varchar(55),
-    email varchar(55),
-    password varchar(55));
-
-insert into logins values("", '', '', '');
+    username varchar(55) collate utf8mb4_bin,
+    email varchar(55) collate utf8mb4_bin,
+    password varchar(64) collate utf8mb4_bin);
 
 
 
-create table datas (
+
+create table userdata (
+    dataID int primary key auto_increment,
+    userID int,
     dataType enum('config', 'other', 'userData'),
-    user varchar(35),
     dataData varchar(150));
 
 
-create table settings (
+create table usersettings (
+    settingID int primary key auto_increment,
+    userID int,
     settingName varchar(45),
     user varchar(35), 
     settingValue varchar(40));
