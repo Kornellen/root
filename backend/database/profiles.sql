@@ -17,11 +17,3 @@ create table userdata (
     dataType enum('config', 'other', 'userData'),
     dataData varchar(150));
 
-
-create table usersettings (
-    settingID int primary key auto_increment,
-    userID int,
-    settingName varchar(45),
-    user varchar(35), 
-    settingValue varchar(40));
-

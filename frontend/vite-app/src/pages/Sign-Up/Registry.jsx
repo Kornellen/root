@@ -1,6 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
-import "../assets/styles/Registry.css";
+import "./Registry.css";
 import { useNavigate } from "react-router-dom";
 
 const Registry = () => {

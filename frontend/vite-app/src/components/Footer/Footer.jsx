@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { Outlet, Link } from "react-router-dom";
-import "../../assets/styles/Footer.css";
+import "./Footer.css";
 import { useTheme } from "../../Context/Theme";
 
 const Footer = () => {

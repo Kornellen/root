@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import "../../assets/styles/Nav.css";
+import "./Nav.css";
 import { Outlet, Link } from "react-router-dom";
 import { useTheme } from "../../Context/Theme";
 import { useLogged } from "../../Context/User";

@@ -1,12 +1,12 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Component } from "react";
-import Layout from "./pages/Layout";
-import Home from "./pages/Home";
-import About from "./pages/About";
-import Login from "./pages/Login";
-import NoPage from "./pages/NoPage";
-import Registry from "./pages/Registry";
-import Profile from "./pages/Profile";
+import Layout from "./routes/Layout";
+import Home from "./pages/Home/Home";
+import About from "./pages/About/About";
+import Login from "./pages/Sign-In/Login";
+import NoPage from "./pages/NotFound/NoPage";
+import Registry from "./pages/Sign-Up/Registry";
+import Profile from "./pages/Dashboard/Profile";
 import "./App.css";
 import { ThemeProvider } from "./Context/Theme";
 import { LoggedProvider, useLogged } from "./Context/User";
@@ -35,8 +35,6 @@ class ErrorBoundary extends Component {
 }
 
 function App() {
-  const username = window.localStorage.getItem("username");
-
   return (
     <ErrorBoundary>
       <BrowserRouter>

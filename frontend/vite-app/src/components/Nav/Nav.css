@@ -1,9 +1,7 @@
-@import "root.css";
-
 nav {
-  background-color: var(--navbgcolor);
-  width: var(--width);
-  border: var(--border);
+  background-color: #242424;
+  width: 100%;
+  border: 4px solid #303030;
 }
 
 nav > ul {
@@ -23,5 +21,5 @@ nav > ul > li {
   transition: 2s ease-out;
   border-radius: 20px;
   padding: 10px;
-  border: var(--border);
+  border: 4px solid #303030;
 }

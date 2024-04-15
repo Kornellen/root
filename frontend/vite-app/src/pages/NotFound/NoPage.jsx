@@ -1,4 +1,4 @@
-import "../assets/styles/404.css";
+import "./404.css";
 
 const NoPage = () => {
   return (

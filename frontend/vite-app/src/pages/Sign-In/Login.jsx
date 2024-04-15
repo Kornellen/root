@@ -1,9 +1,9 @@
-import "../assets/styles/Login.css";
+import "./Login.css";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useTheme } from "../Context/Theme";
-import ErrInf from "../components/ErrInfo/ErrInfo";
+import { useTheme } from "../../Context/Theme";
+import ErrInf from "./components/ErrInfo/ErrInfo";
 
 const Login = () => {
   let err = false;

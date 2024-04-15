@@ -1,7 +1,7 @@
 import { faMoon, faSun } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import "../../assets/styles/ThemeBtn.css";
-import { useTheme } from "../../Context/Theme";
+import "./ThemeBtn.css";
+import { useTheme } from "../../../Context/Theme";
 
 const ThemeBtn = () => {
   // const themeBTN = window.localStorage.getItem("theme") || "light";

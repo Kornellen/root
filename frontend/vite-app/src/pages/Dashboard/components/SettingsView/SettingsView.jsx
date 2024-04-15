@@ -1,7 +1,7 @@
 import { useState } from "react";
-import "../../assets/styles/SettingsView.css";
+import "./SettingsView.css";
 import axios from "axios";
-import { useTheme } from "../../Context/Theme";
+import { useTheme } from "../../../../Context/Theme";
 
 const SettingsView = (props) => {
   const [updatedUserDatas, setUUD] = useState({

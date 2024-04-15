@@ -1,5 +1,5 @@
-import { useTheme } from "../Context/Theme";
-import "../assets/styles/About.css";
+import { useTheme } from "../../Context/Theme";
+import "./About.css";
 
 const About = () => {
   const { theme } = useTheme();

@@ -1,4 +1,4 @@
-import ThemeBtn from "../components/Buttons/ThemeBtn";
+import ThemeBtn from "../components/Buttons/ThemeBtn/ThemeBtn";
 import Footer from "../components/Footer/Footer";
 import Nav from "../components/Nav/Nav";
 

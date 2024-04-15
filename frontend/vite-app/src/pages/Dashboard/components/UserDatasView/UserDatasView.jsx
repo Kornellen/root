@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import "../../assets/styles/UserDatasView.css";
+import "./UserDatasView.css";
 import axios from "axios";
 
 const UserDatasView = () => {

@@ -1,12 +1,12 @@
-import "../assets/styles/Profile.css";
+import "./Profile.css";
 import { useEffect, useState, useRef } from "react";
 import axios from "axios";
-import UserDatasView from "../components/UserDatasView/UserDatasView";
-import SettingsView from "../components/SettingsView/SettingsView";
+import UserDatasView from "./components/UserDatasView/UserDatasView";
+import SettingsView from "./components/SettingsView/SettingsView";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGear } from "@fortawesome/free-solid-svg-icons";
-import { useTheme } from "../Context/Theme";
-import { useLogged } from "../Context/User";
+import { useTheme } from "../../Context/Theme";
+import { useLogged } from "../../Context/User";
 import { useNavigate } from "react-router-dom";
 
 const Profile = () => {
