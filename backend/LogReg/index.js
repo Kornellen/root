@@ -97,20 +97,27 @@ app.post("/updateuser", (req, res) => {
   const newPassword = hash(data.newPass);
   const oldPassword = hash(data.oldPass);
 
-  if (newUser.length === 0) {
+  if (
+    newPassword ===
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855" &&
+    newUser === ""
+  ) {
+    console.log("[INFO]: Nothing changed");
+  } else if (newUser.length === 0) {
     var sql =
       "update `logins` set `password` = ? where `username` = ? and `password` = ?;";
 
     con.query(sql, [newPassword, oldUser, oldPassword], (err, result) => {
-      err ? console.error(err) : console.log("[INFO]: Success");
+      err ? console.error(err) : console.log("[INFO]: Changed Password");
     });
-  }
-
-  if (newPassword.length === 0) {
+  } else if (
+    newPassword ===
+    "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  ) {
     var sql =
       "update `logins` set `username` = ? where `username` = ? and `password` = ?;";
     con.query(sql, [newUser, oldUser, oldPassword], (err, result) =>
-      err ? console.error(err) : console.log("[INFO]: Success")
+      err ? console.error(err) : console.log("[INFO]: Changed Username")
     );
   } else {
     var sql =
@@ -119,7 +126,7 @@ app.post("/updateuser", (req, res) => {
       sql,
       [newUser, newPassword, oldUser, oldPassword],
       (err, result) =>
-        err ? console.error(err) : console.log("[INFO]: Success")
+        err ? console.error(err) : console.log("[INFO]: Changed everything")
     );
   }
 });
