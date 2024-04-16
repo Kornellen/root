@@ -15,14 +15,7 @@ const Profile = () => {
   const { user, logOut, logIn } = useLogged();
   const [userN, setData] = useState(null);
   const [time, setTime] = useState("");
-  const [userDatas, setUsersDatas] = useState([
-    {
-      dataType: null,
-      dataData: null,
-    },
-  ]);
   const [view, setView] = useState(false);
-
   const { theme } = useTheme();
   const uid = window.localStorage.getItem("userid");
 
@@ -62,13 +55,6 @@ const Profile = () => {
 
     navigate("/login");
   };
-  useEffect(() => {
-    const getDatasFromLocalStorage = () => {
-      setData(() => window.localStorage.getItem("username"));
-    };
-
-    getDatasFromLocalStorage();
-  }, []);
 
   useEffect(() => {
     const fetchD = async () => {

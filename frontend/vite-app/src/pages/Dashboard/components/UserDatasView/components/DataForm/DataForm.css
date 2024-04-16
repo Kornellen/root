@@ -1,0 +1,21 @@
+.add-data {
+  width: 45%;
+  float: left;
+  height: 500px;
+  margin-left: 10px;
+  padding: 10px;
+  border: 1px solid #8e8e8e;
+}
+
+select {
+  border-radius: 10px;
+  color: #c0c0c0;
+  font-size: 1.25rem;
+  background-color: #686868;
+  border: transparent;
+}
+
+.data-form {
+  float: left;
+  width: 50%;
+}
