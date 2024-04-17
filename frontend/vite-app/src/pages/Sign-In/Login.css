@@ -7,6 +7,17 @@
   background-color: #2a2a2a;
 }
 
+.pass-vis-btn {
+  border: transparent;
+  background-color: transparent;
+  color: #8c8c8c;
+  position: absolute;
+  bottom: 137px;
+  right: 35px;
+  font-size: 30px;
+  padding: 3px;
+}
+
 .success {
   display: none;
 }

@@ -1,3 +1,5 @@
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./Login.css";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -6,6 +8,7 @@ import { useTheme } from "../../Context/Theme";
 import ErrInf from "./components/ErrInfo/ErrInfo";
 
 const Login = () => {
+  const [showPass, setShowPass] = useState(false);
   let err = false;
   const { theme } = useTheme();
   const navigate = useNavigate();
@@ -37,14 +40,7 @@ const Login = () => {
     if (err === false) {
       e.preventDefault();
       try {
-        if (
-          formDatas.password != null &&
-          formDatas.password != undefined &&
-          formDatas.password != "" &&
-          formDatas.username != null &&
-          formDatas.username != undefined &&
-          formDatas.username != ""
-        ) {
+        if (formDatas.password != "" && formDatas.username != "") {
           const response = await axios.post(
             "http://localhost:5175/login",
             formDatas
@@ -88,6 +84,10 @@ const Login = () => {
     }
   };
 
+  const handleClickPassShow = () => {
+    setShowPass((current) => !current);
+  };
+
   const handleChange = (e) => {
     setFormDatas({
       ...formDatas,
@@ -114,12 +114,19 @@ const Login = () => {
           </div>
           <div className="password">
             <input
-              type="password"
+              type={showPass ? "text" : "password"}
               name="password"
               id=""
               placeholder="Password"
               onChange={handleChange}
             />
+            <button onClick={handleClickPassShow} className="pass-vis-btn">
+              {showPass ? (
+                <FontAwesomeIcon icon={faEyeSlash} />
+              ) : (
+                <FontAwesomeIcon icon={faEye} />
+              )}
+            </button>
           </div>
           <div className="submit">
             <input type="submit" value="Log In" id="login" />

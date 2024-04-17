@@ -1,9 +1,13 @@
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import axios from "axios";
 import "./Registry.css";
 import { useNavigate } from "react-router-dom";
 
 const Registry = () => {
+  const [showPass0, setShowPass0] = useState(false);
+  const [showPass1, setShowPass1] = useState(false);
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     username: "",
@@ -11,6 +15,13 @@ const Registry = () => {
     password: "",
     uid: 0,
   });
+
+  const handleClickPassShow0 = () => {
+    setShowPass0((current) => !current);
+  };
+  const handleClickPassShow1 = () => {
+    setShowPass1((current) => !current);
+  };
 
   const handleChange = (e) => {
     setFormData({
@@ -72,7 +83,7 @@ const Registry = () => {
 
         <div className="password">
           <input
-            type="password"
+            type={showPass0 ? "text" : "password"}
             name="password"
             id=""
             placeholder="Password"
@@ -80,9 +91,19 @@ const Registry = () => {
             value={formData.value}
             onChange={handleChange}
           />
+          <button
+            onClick={handleClickPassShow0}
+            className="pass-vis-btn-reg-pass"
+          >
+            {showPass0 ? (
+              <FontAwesomeIcon icon={faEyeSlash} />
+            ) : (
+              <FontAwesomeIcon icon={faEye} />
+            )}
+          </button>
           <br />
           <input
-            type="password"
+            type={showPass0 ? "text" : "password"}
             name="passwordr"
             id=""
             placeholder="Repeat Password"
@@ -90,6 +111,16 @@ const Registry = () => {
             value={formData.value}
             onChange={handleChange}
           />
+          <button
+            onClick={handleClickPassShow1}
+            className="pass-vis-btn-reg-rep"
+          >
+            {showPass1 ? (
+              <FontAwesomeIcon icon={faEyeSlash} />
+            ) : (
+              <FontAwesomeIcon icon={faEye} />
+            )}
+          </button>
         </div>
         <div className="submit">
           <input type="submit" value="Registry" />

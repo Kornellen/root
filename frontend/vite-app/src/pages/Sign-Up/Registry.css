@@ -6,6 +6,22 @@
   background-image: linear-gradient(45deg, #2c2c2c, #525252);
 }
 
+.pass-vis-btn-reg-rep,
+.pass-vis-btn-reg-pass {
+  border: transparent;
+  background-color: transparent;
+  color: #8c8c8c;
+  font-size: 30px;
+  padding: 3px;
+}
+
+.pass-vis-btn-reg-pass,
+.pass-vis-btn-reg-rep {
+  position: relative;
+  right: 65px;
+  bottom: -1px;
+}
+
 .RegForm {
   border-radius: 20px;
   background-image: linear-gradient(45deg, #525252, #161616);
