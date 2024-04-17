@@ -112,7 +112,7 @@ const Login = () => {
               onChange={handleChange}
             />
           </div>
-          <div className="password">
+          <div className="password-log">
             <input
               type={showPass ? "text" : "password"}
               name="password"
@@ -120,7 +120,12 @@ const Login = () => {
               placeholder="Password"
               onChange={handleChange}
             />
-            <button onClick={handleClickPassShow} className="pass-vis-btn">
+
+            <button
+              onClick={handleClickPassShow}
+              type="button"
+              className="pass-vis-btn"
+            >
               {showPass ? (
                 <FontAwesomeIcon icon={faEyeSlash} />
               ) : (
@@ -131,20 +136,22 @@ const Login = () => {
           <div className="submit">
             <input type="submit" value="Log In" id="login" />
           </div>
+          <br />
+          <div className="registry">
+            <button
+              className="reg-btn"
+              value="Registry"
+              onClick={(event) => {
+                event.preventDefault();
+                navigate("/registry");
+              }}
+            >
+              Registry
+            </button>
+          </div>
         </div>
         <div className={err ? `error` : `success`}>
           {err ? <p>Incorect Datas</p> : <p>Success</p>}
-        </div>
-        <div className="registry">
-          <button
-            value="Registry"
-            onClick={(event) => {
-              event.preventDefault();
-              navigate("/registry");
-            }}
-          >
-            Registry
-          </button>
         </div>
         {errType && (
           <div className="err">

@@ -58,72 +58,76 @@ const Registry = () => {
   return (
     <div className="Registry">
       <form onSubmit={handleSubmit} method="post" className="RegForm">
-        <div className="username">
-          <input
-            type="text"
-            name="username"
-            id=""
-            placeholder="Username"
-            required
-            value={formData.value}
-            onChange={handleChange}
-          />
-        </div>
-        <div className="email">
-          <input
-            type="email"
-            name="email"
-            id=""
-            placeholder="Email"
-            required
-            value={formData.value}
-            onChange={handleChange}
-          />
-        </div>
+        <div className="reg-inputs">
+          <div className="username">
+            <input
+              type="text"
+              name="username"
+              id=""
+              placeholder="Username"
+              required
+              value={formData.value}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="email">
+            <input
+              type="email"
+              name="email"
+              id=""
+              placeholder="Email"
+              required
+              value={formData.value}
+              onChange={handleChange}
+            />
+          </div>
 
-        <div className="password">
-          <input
-            type={showPass0 ? "text" : "password"}
-            name="password"
-            id=""
-            placeholder="Password"
-            required
-            value={formData.value}
-            onChange={handleChange}
-          />
-          <button
-            onClick={handleClickPassShow0}
-            className="pass-vis-btn-reg-pass"
-          >
-            {showPass0 ? (
-              <FontAwesomeIcon icon={faEyeSlash} />
-            ) : (
-              <FontAwesomeIcon icon={faEye} />
-            )}
-          </button>
-          <br />
-          <input
-            type={showPass0 ? "text" : "password"}
-            name="passwordr"
-            id=""
-            placeholder="Repeat Password"
-            required
-            value={formData.value}
-            onChange={handleChange}
-          />
-          <button
-            onClick={handleClickPassShow1}
-            className="pass-vis-btn-reg-rep"
-          >
-            {showPass1 ? (
-              <FontAwesomeIcon icon={faEyeSlash} />
-            ) : (
-              <FontAwesomeIcon icon={faEye} />
-            )}
-          </button>
-        </div>
-        <div className="submit">
-          <input type="submit" value="Registry" />
+          <div className="password-reg">
+            <input
+              type={showPass0 ? "text" : "password"}
+              name="password"
+              id=""
+              placeholder="Password"
+              required
+              value={formData.value}
+              onChange={handleChange}
+            />
+            <button
+              onClick={handleClickPassShow0}
+              className="pass-vis-btn-reg-pass"
+              type="button"
+            >
+              {showPass0 ? (
+                <FontAwesomeIcon icon={faEyeSlash} />
+              ) : (
+                <FontAwesomeIcon icon={faEye} />
+              )}
+            </button>
+            <br />
+            <input
+              type={showPass0 ? "text" : "password"}
+              name="passwordr"
+              id=""
+              placeholder="Repeat Password"
+              required
+              value={formData.value}
+              onChange={handleChange}
+            />
+            <button
+              onClick={handleClickPassShow1}
+              className="pass-vis-btn-reg-rep"
+              type="button"
+            >
+              {showPass1 ? (
+                <FontAwesomeIcon icon={faEyeSlash} />
+              ) : (
+                <FontAwesomeIcon icon={faEye} />
+              )}
+            </button>
+          </div>
+          <div className="submit">
+            <input type="submit" value="Registry" />
+          </div>
         </div>
       </form>
     </div>

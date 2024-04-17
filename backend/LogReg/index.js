@@ -39,6 +39,7 @@ app.post("/registry", (req, res) => {
 });
 
 app.post("/login", (req, res) => {
+  console.log("Login try");
   const formDatas = req.body;
 
   const username = formDatas.username;

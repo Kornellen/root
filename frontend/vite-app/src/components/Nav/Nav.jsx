@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
 import "./Nav.css";
+import ThemeBtn from "../Buttons/ThemeBtn/ThemeBtn";
 import { Outlet, Link } from "react-router-dom";
 import { useTheme } from "../../Context/Theme";
 import { useLogged } from "../../Context/User";
@@ -12,6 +12,9 @@ const Nav = () => {
     <>
       <nav className={`theme-${theme}`}>
         <ul>
+          <li>
+            <ThemeBtn />
+          </li>
           <li>
             <Link to="/" className={`theme-${theme}`}>
               Home

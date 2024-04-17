@@ -1,17 +1,16 @@
 .btn-theme {
-  border-radius: 10px;
-  top: 50px;
-  right: 425px;
-  position: absolute;
   padding: 10px;
-  width: 40px;
-  border: 2px solid #3e3e3e;
-  background-color: #575757;
+  width: 100%;
+  height: 100%;
+  border: transparent;
+  background-color: transparent;
   color: #c1c1c1;
-  font-size: 1rem;
-  transition: 1s;
+  font-size: 1.5rem;
 }
 
-.btn-theme:hover {
-  box-shadow: -2px -2px 5px black, 0 0 5px gray;
+.theme-btn {
+  width: 40px;
+  position: relative;
+  top: -5px;
+  left: -2px;
 }
