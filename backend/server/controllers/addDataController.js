@@ -17,11 +17,21 @@ const addData = (req, res) => {
 
   const data = new Data(dataType, dataData, uid);
 
+  console.log("[ADD DATA]: Attempting to add data ⚠️".yellow);
+
   var sql =
     "insert into userdata (userID, dataType, dataData) values (?, ?, ?)";
 
   con.query(sql, [data.uid, data.dataType, data.dataData], (err, result) => {
-    err ? res.json({ info: "err" }) : res.json({ info: "succes" });
+    err
+      ? res.json(
+          { info: "err" },
+          console.log("[ADD DATA]: Failed to add data ⛔".red)
+        )
+      : res.json(
+          { info: "succes" },
+          console.log("[ADD DATA]:".blue + " Success ✅")
+        );
   });
 };
 

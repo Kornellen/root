@@ -16,6 +16,9 @@ con.connect(async (err) => {
 
 const registryUser = (req, res) => {
   const { username, email, password, uid } = req.body;
+
+  console.log("[REGISTRY]:".yellow + " Registry attempt ⚠️".yellow);
+
   const newUser = new User(username, email, password, uid);
   const sql = `insert into logins values (?, ?, ?, ?)`;
 
@@ -23,9 +26,13 @@ const registryUser = (req, res) => {
     sql,
     [newUser.uid, newUser.username, newUser.email, hash(newUser.password)],
     (err, result) => {
-      err
-        ? res.status(500).json({ error: "Internal Server Error" })
-        : res.json({ message: "Success!" });
+      if (err) {
+        res.status(500).json({ error: "Internal Server Error" });
+        console.log("[REGISTRY]:".red + " Failed to registry ⛔".red);
+      } else {
+        res.json({ message: "Success!" });
+        console.log("[REGISTRY]:".blue + " Succcess ✅".green);
+      }
     }
   );
 };

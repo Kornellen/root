@@ -14,9 +14,20 @@ con.connect(async (err) => {
 const uidToUser = (req, res) => {
   const { uid } = req.body;
 
+  console.log(
+    "[UID => USERNAME]:".yellow +
+      " Attempting to convert UID => Username ⚠️".yellow
+  );
+
   var sql = "select username from `logins` where userID = ?;";
   con.query(sql, [uid], (err, result) => {
-    err ? console.error(err) : res.json(result);
+    err
+      ? console.log(
+          "[UID => USERNAME]: " + "Failed to convert UID => USERNAME ⛔",
+          err
+        )
+      : (res.json(result),
+        console.log("[UID => USERNAME]:".blue + " Successed convert ✅".green));
   });
 };
 

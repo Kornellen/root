@@ -1,4 +1,5 @@
 .show {
+  z-index: 2;
   background-color: #303030;
   width: 50%;
   height: 45%;
