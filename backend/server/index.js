@@ -21,7 +21,7 @@ var con = mysql.createConnection({
 });
 
 con.connect(async (err) => {
-  err ? console.log(err) : console.log("connected");
+  err ? console.log(err) : console.log("[DEBUG]:Connected");
 });
 
 app.post("/registry", (req, res) => {
@@ -36,10 +36,11 @@ app.post("/registry", (req, res) => {
   con.query(sql, [uid, username, email, password], (err, result) => {
     err ? console.log(err) : res.json({ message: "Success!" });
   });
+  con.end();
 });
 
 app.post("/login", (req, res) => {
-  console.log("Login try");
+  console.log("[LOGIN]: Login try");
   const formDatas = req.body;
 
   const username = formDatas.username;
@@ -61,11 +62,12 @@ app.post("/login", (req, res) => {
       }
     }
   });
+  con.end();
 });
 
 app.post("/userdata", (req, res) => {
   const data = req.body;
-
+  console.log("[DATA]: Trying to get data");
   const uid = data.uid;
 
   var sql =
@@ -73,10 +75,12 @@ app.post("/userdata", (req, res) => {
   con.query(sql, [uid], async (err, result) => {
     err ? console.log(err) : await res.json(result);
   });
+  con.end();
 });
 
 app.post("/adddata", (req, res) => {
   const data = req.body;
+  console.log("[DATA]: Trying to add data");
 
   const dataType = data.dataType;
   const datA = data.data;
@@ -88,6 +92,7 @@ app.post("/adddata", (req, res) => {
   con.query(sql, [uid, dataType, datA], (err, result) => {
     err ? res.json({ info: "err" }) : res.json({ info: "succes" });
   });
+  con.end();
 });
 
 app.post("/updateuser", (req, res) => {
@@ -130,6 +135,7 @@ app.post("/updateuser", (req, res) => {
         err ? console.error(err) : console.log("[INFO]: Changed everything")
     );
   }
+  con.end();
 });
 
 app.post("/usernametouid", (req, res) => {
@@ -141,6 +147,7 @@ app.post("/usernametouid", (req, res) => {
   con.query(sql, [username, password], (err, result) => {
     err ? console.error(err) : res.json(result);
   });
+  con.end();
 });
 
 app.post("/uidtousername", (req, res) => {
@@ -150,6 +157,8 @@ app.post("/uidtousername", (req, res) => {
   con.query(sql, [uid], (err, result) => {
     err ? console.error(err) : res.json(result);
   });
+
+  con.end();
 });
 
 app.listen(port, () => {
