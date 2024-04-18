@@ -60,16 +60,14 @@ const Profile = () => {
     const fetchD = async () => {
       try {
         const response = await axios.post(
-          "http://localhost:5175/uidtousername",
+          "http://localhost:5175/api/uidtousername",
           {
-            userID: uid,
+            uid: uid,
           }
         );
 
-        if (isMounted.current) {
-          const data = await response.data[0]?.username;
-          data ? await setData(data) : navigate("/login");
-        }
+        const data = await response.data[0]?.username;
+        data ? await setData(data) : navigate("/login");
       } catch (error) {
         console.log(error);
       }

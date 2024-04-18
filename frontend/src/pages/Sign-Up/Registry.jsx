@@ -39,7 +39,7 @@ const Registry = () => {
       localStorage.setItem(e.target.name, e.target.value);
       try {
         const response = await axios.post(
-          "http://localhost:5175/registry",
+          "http://localhost:5175/api/register",
           formData
         );
         console.log("Server response: ", response.data.message);

@@ -7,7 +7,7 @@ const DataForm = (props) => {
   const [status, setStatus] = useState(null);
   const [data, setData] = useState({
     dataType: "other",
-    data: "",
+    dataData: "",
     uid: props.uid,
   });
 
@@ -15,7 +15,10 @@ const DataForm = (props) => {
     e.preventDefault();
 
     const sendData = async () => {
-      const response = await axios.post("http://localhost:5175/adddata", data);
+      const response = await axios.post(
+        "http://localhost:5175/api/adddata",
+        data
+      );
 
       console.log(response.data.info);
 
@@ -43,7 +46,7 @@ const DataForm = (props) => {
         <input
           type="text"
           name="data"
-          onChange={(e) => setData({ ...data, data: e.target.value })}
+          onChange={(e) => setData({ ...data, dataData: e.target.value })}
           placeholder="(max 150)"
           maxLength={150}
         />

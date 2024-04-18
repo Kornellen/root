@@ -42,9 +42,11 @@ const Login = () => {
       try {
         if (formDatas.password != "" && formDatas.username != "") {
           const response = await axios.post(
-            "http://localhost:5175/login",
+            "http://localhost:5175/api/login",
             formDatas
           );
+
+          console.log(response);
 
           if (response.data.info === 200) {
             setLog((current) => !current);
@@ -67,7 +69,7 @@ const Login = () => {
 
       try {
         const response2 = await axios.post(
-          "http://localhost:5175/usernametouid",
+          "http://localhost:5175/api/usernametouid",
           formDatas
         );
 

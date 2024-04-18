@@ -3,7 +3,7 @@ import "./Data.css";
 
 const Data = (props) => {
   const uid = props.uid;
-  const [data] = useFetch("http://localhost:5175/userdata", { uid: uid });
+  const [data] = useFetch("http://localhost:5175/api/userdata", { uid: uid });
 
   return (
     <div className="datas">
