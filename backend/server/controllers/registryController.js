@@ -2,11 +2,16 @@ const databaseConfig = require("../config/database");
 const User = require("../models/User");
 const mysql = require("mysql");
 const { hash } = require("../utils/hashPass");
+var colors = require("colors");
+
+colors.enable();
 
 const con = mysql.createConnection(databaseConfig);
 
 con.connect(async (err) => {
-  err ? console.log(err) : console.log("[DEBUG]:Connected Registry Endpoint");
+  err
+    ? console.log(err)
+    : console.log("[REGISTRY]:".blue + " Connected ✅ \n".green);
 });
 
 const registryUser = (req, res) => {

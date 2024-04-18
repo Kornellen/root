@@ -1,5 +1,8 @@
 const express = require("express");
 const cors = require("cors");
+var colors = require("colors");
+
+colors.enable();
 
 const addDataRoute = require("./routes/addData");
 const loginRoute = require("./routes/loginRoutes");
@@ -28,5 +31,9 @@ const routes = [
 app.use("/api", routes);
 
 app.listen(port, () => {
-  console.log("App started on:", port);
+  console.log(
+    `[INFO]:`.gray +
+      ` APP IS LISTENING ON: `.gray +
+      `http://localhost:${port} 🔧 \n`.bold.grey
+  );
 });

@@ -1,12 +1,15 @@
 const mysql = require("mysql");
 const databaseConfig = require("../config/database");
 const { hash } = require("../utils/hashPass");
+var colors = require("colors");
+
+colors.enable();
 
 const con = mysql.createConnection(databaseConfig);
 con.connect(async (err) => {
   err
     ? console.log(err)
-    : console.log("[DEBUG]:Connected Username -> UID Endpoint");
+    : console.log("[USERNAME => UID]:".blue + " Connected ✅ \n".green);
 });
 
 const userToUID = (req, res) => {

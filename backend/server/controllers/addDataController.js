@@ -1,10 +1,15 @@
 const databaseConfig = require("../config/database");
 const Data = require("../models/Data");
 const mysql = require("mysql");
+var colors = require("colors");
+
+colors.enable();
 
 const con = mysql.createConnection(databaseConfig);
 con.connect(async (err) => {
-  err ? console.log(err) : console.log("[DEBUG]:Connected Add Data Endpoint");
+  err
+    ? console.log(err.red)
+    : console.log(`[ADD DATA]:`.blue + " Connected ✅ \n".green);
 });
 
 const addData = (req, res) => {

@@ -1,10 +1,15 @@
 const databaseConfig = require("../config/database");
 const mysql = require("mysql");
 const { hash } = require("../utils/hashPass");
+var colors = require("colors");
+
+colors.enable();
 
 const con = mysql.createConnection(databaseConfig);
 con.connect(async (err) => {
-  err ? console.log(err) : console.log("[DEBUG]:Connected Login Endpoint");
+  err
+    ? console.log(err)
+    : console.log("[LOGIN]:".blue + " Connected ✅ \n".green);
 });
 
 const loginUser = (req, res) => {

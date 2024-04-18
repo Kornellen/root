@@ -73,7 +73,7 @@ const Profile = () => {
       }
     };
     fetchD();
-  }, []);
+  }, [uid, navigate]);
 
   return userN ? (
     userN && (

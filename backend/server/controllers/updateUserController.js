@@ -1,12 +1,15 @@
 const mysql = require("mysql");
 const { hash } = require("../utils/hashPass");
 const databaseConfig = require("../config/database");
+var colors = require("colors");
+
+colors.enable();
 
 const con = mysql.createConnection(databaseConfig);
 con.connect(async (err) => {
   err
     ? console.log(err)
-    : console.log("[DEBUG]:Connected Update User Endpoint");
+    : console.log("[UPDATE USER]:".blue + " Connected ✅ \n".green);
 });
 
 const updateuser = (req, res) => {
