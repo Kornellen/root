@@ -18,8 +18,8 @@ const ThemeBtn = () => {
   // };
 
   return (
-    <div className="theme-btn">
-      <button onClick={toggleTheme} className="btn-theme">
+    <div className={`theme-btn theme-${theme}`}>
+      <button onClick={toggleTheme} className={`btn-theme theme-${theme}`}>
         {theme === "light" ? (
           <FontAwesomeIcon icon={faMoon} />
         ) : (

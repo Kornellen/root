@@ -24,14 +24,10 @@ const addData = (req, res) => {
 
   con.query(sql, [data.uid, data.dataType, data.dataData], (err, result) => {
     err
-      ? res.json(
-          { info: "err" },
-          console.log("[ADD DATA]: Failed to add data ⛔".red)
-        )
-      : res.json(
-          { info: "succes" },
-          console.log("[ADD DATA]:".blue + " Success ✅")
-        );
+      ? (res.json({ info: "err" }),
+        console.log("[ADD DATA]: Failed to add data ⛔".red + "\n"))
+      : (res.json({ info: "succes" }),
+        console.log("[ADD DATA]:".blue + " Success ✅".green + "\n"));
   });
 };
 

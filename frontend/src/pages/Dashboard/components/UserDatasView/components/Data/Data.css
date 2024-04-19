@@ -15,12 +15,14 @@
 }
 
 .data {
-  width: 48.735%;
+  width: 48%;
   margin: 5px;
   border: 1px solid #686868;
 }
 
 .data:hover {
+  border-radius: 10px;
+  box-shadow: 2px 2px 5px #4f4f4f;
   background-color: #8e8e8e;
   color: #686868;
 }

@@ -1,9 +1,10 @@
 body {
+  margin: 0;
+  padding: 0;
   overflow-x: hidden;
 }
 
 .theme-light {
-  transition: 2s;
   background-color: #bbbbbb;
   color: #3e3e3e;
 }
@@ -13,12 +14,6 @@ a {
   text-decoration: none;
 }
 
-@media (prefers-color-scheme: dark) {
-  a {
-    color: #bbbbbb;
-  }
-}
 .theme-dark {
-  transition: 2s;
   color: #bbbbbb;
 }

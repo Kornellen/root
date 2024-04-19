@@ -4,8 +4,10 @@ import { useState } from "react";
 import axios from "axios";
 import "./Registry.css";
 import { useNavigate } from "react-router-dom";
+import { useTheme } from "../../Context/Theme";
 
 const Registry = () => {
+  const { theme } = useTheme();
   const [showPass0, setShowPass0] = useState(false);
   const [showPass1, setShowPass1] = useState(false);
   const navigate = useNavigate();
@@ -56,7 +58,7 @@ const Registry = () => {
   };
 
   return (
-    <div className="Registry">
+    <div className={`Registry theme-${theme}`}>
       <form onSubmit={handleSubmit} method="post" className="RegForm">
         <div className="reg-inputs">
           <div className="username">

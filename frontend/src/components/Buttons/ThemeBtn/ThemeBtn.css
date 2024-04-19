@@ -10,7 +10,5 @@
 
 .theme-btn {
   width: 40px;
-  position: relative;
-  top: -5px;
-  left: -2px;
+  height: 30px;
 }

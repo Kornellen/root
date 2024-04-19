@@ -1,10 +1,6 @@
 .log-out {
-  position: absolute;
-  top: 0;
-  right: 0;
-  display: flex;
-  align-content: center;
-  justify-content: flex-end;
+  position: relative;
+  z-index: 3;
 }
 .lgOut-btn {
   outline: none;
@@ -13,21 +9,42 @@
   color: #c1c1c1;
   border: 2px solid #3e3e3e;
   background-color: #575757;
-  width: 100px;
-  font-size: 1rem;
+  width: 150px;
+  font-size: 1.5rem;
   padding: 10px;
   border-radius: 10px;
   transition: 3s linear;
 }
 
+.vertical-line {
+  border: 2px solid #3e3e3e;
+  border-radius: 20px;
+}
+.profile-buttons {
+  width: 60%;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  flex-direction: row-reverse;
+}
+
+.profile-utils {
+  display: flex;
+  border: 2px solid transparent;
+  height: 100px;
+  padding: 2px;
+}
+
+.setting-btn {
+  position: relative;
+  z-index: 5;
+}
+
 .btn-setting {
-  position: absolute;
-  top: 0;
-  right: 125px;
-  z-index: 4;
+  z-index: 2;
   color: #c1c1c1;
   font-weight: bold;
-  font-size: 1rem;
+  font-size: 1.5rem;
   border: 2px solid #3e3e3e;
   background-color: #929292;
   padding: 10px;
@@ -39,10 +56,19 @@
   background-color: #929292;
 }
 
+.position {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40%;
+  text-align: center;
+}
+
 .time {
-  font-size: 2.5rem;
-  position: absolute;
-  top: 0;
+  font-weight: bold;
+  font-size: 2.25rem;
+  text-align: center;
+  width: 10%;
 }
 
 h1 {
@@ -52,7 +78,9 @@ h1 {
 
 .profile {
   clear: both;
-  height: 1000px;
+  height: 660px;
+  margin-left: 25px;
+  width: 98%;
   position: relative;
   padding: 10px;
 }

@@ -7,16 +7,18 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGear } from "@fortawesome/free-solid-svg-icons";
 import { useTheme } from "../../Context/Theme";
 import { useLogged } from "../../Context/User";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import usePosition from "./hooks/usePosition";
 
 const Profile = () => {
   const navigate = useNavigate();
-  const isMounted = useRef(true);
   const { user, logOut, logIn } = useLogged();
   const [userN, setData] = useState(null);
   const [time, setTime] = useState("");
   const [view, setView] = useState(false);
   const { theme } = useTheme();
+  const position = usePosition();
+
   const uid = window.localStorage.getItem("userid");
 
   useEffect(() => {
@@ -78,18 +80,47 @@ const Profile = () => {
   return userN ? (
     userN && (
       <div className={`profile theme-${theme}`}>
-        <h1>Hello {userN}!</h1>
-        <div className="time">{time}</div>
-        <div className="log-out">
-          <button onClick={handleLogOut} className="lgOut-btn">
-            Log Out
-          </button>
+        <div className="profile-utils">
+          <div className="time">
+            <p>{time}</p>
+          </div>
+          <div className="vertical-line"></div>
+          <div className="position">
+            {position.latitude != undefined &&
+            position.longitude != undefined ? (
+              <a
+                href={`https://www.google.pl/maps/place/${position.latitude}+${position.longitude}`}
+                target="_blank"
+                className={`theme-${theme}`}
+              >
+                Position: {`${position.latitude} | ${position.longitude}`}
+              </a>
+            ) : (
+              <p>{`${position.error}`}</p>
+            )}
+          </div>
+          <div className="vertical-line"></div>
+          <div className="profile-buttons">
+            <div className="log-out">
+              <button onClick={handleLogOut} className="lgOut-btn">
+                Log Out
+              </button>
+            </div>
+            <div className="settings-btn">
+              <button
+                className={`btn-setting theme-${theme}`}
+                onClick={handleSettings}
+              >
+                <FontAwesomeIcon icon={faGear} />
+              </button>
+            </div>
+          </div>
         </div>
-        <div className="settings-btn">
-          <button className="btn-setting" onClick={handleSettings}>
-            <FontAwesomeIcon icon={faGear} />
-          </button>
+        <hr />
+        <div className="greetings">
+          <h1>Hello {userN}!</h1>
         </div>
+
         <SettingsView class={view} user={userN} />
         <UserDatasView />
       </div>

@@ -43,7 +43,7 @@ const SettingsView = (props) => {
     >
       <div className="settingsTable">
         <form action="" onSubmit={handleSubmit}>
-          <label htmlFor="newUser">New Username</label>
+          <label htmlFor="newUser">New Username: </label>
           <input
             type="text"
             name="newUser"
@@ -52,11 +52,11 @@ const SettingsView = (props) => {
           />
           <br />
           <br />
-          <label htmlFor="newPass">New Password</label>
+          <label htmlFor="newPass">New Password: </label>
           <input type="text" name="newPass" onChange={handleChange} />
           <br />
           <br />
-          <label htmlFor="oldPass">Old Password</label>
+          <label htmlFor="oldPass">Old Password: </label>
           <input type="text" name="oldPass" onChange={handleChange} />
           <br />
           <br />

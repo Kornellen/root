@@ -8,7 +8,7 @@ const con = mysql.createConnection(databaseConfig);
 con.connect(async (err) => {
   err
     ? console.log(err)
-    : console.log("[USER DATA]:".blue.green + " Connected ✅ \n".green);
+    : console.log("[USER DATA]:".blue + " Connected ✅ \n".green);
 });
 
 const userData = (req, res) => {
