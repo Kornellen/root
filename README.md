@@ -9,11 +9,13 @@ React and Node.JS - Backend and Frontend Project is a React app with Node.JS API
 1. Clone GitHub repo to your computer using **git clone**
 2. Run **npm install** in frontend/ and backend/server folders to install all of used dependencies
 3. Using MySQL import database from file _backend/database_
+4. In filie _backend/server/config/email.js_ in object user: "" put email address
 
 ## Running
 
-To start frontend go to _frontend/_ and use **npm run dev**; App will start working at http://localhost:5173
-To start backend go to backend/server and use **node index.js**; API will start working at http://localhost:5175
+To start frontend go to _frontend/_ and use **npm run dev**;<br> App will start working at **[http://localhost:5173]**
+<br>To start backend go to backend/server and use **node index.js**;
+<br> API will start working at **[http://localhost:5175]**
 
 ## Example usage
 

@@ -107,7 +107,7 @@ const Registry = () => {
             </button>
             <br />
             <input
-              type={showPass0 ? "text" : "password"}
+              type={showPass1 ? "text" : "password"}
               name="passwordr"
               id=""
               placeholder="Repeat Password"

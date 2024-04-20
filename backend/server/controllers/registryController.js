@@ -3,6 +3,7 @@ const User = require("../models/User");
 const mysql = require("mysql");
 const { hash } = require("../utils/hashPass");
 var colors = require("colors");
+const { sendMail } = require("../utils/sendEmail");
 
 colors.enable();
 
@@ -31,6 +32,7 @@ const registryUser = (req, res) => {
         console.log("[REGISTRY]:".red + " Failed to registry ⛔".red);
       } else {
         res.json({ message: "Success!" });
+        sendMail(newUser.email);
         console.log("[REGISTRY]:".blue + " Succcess ✅".green);
       }
     }

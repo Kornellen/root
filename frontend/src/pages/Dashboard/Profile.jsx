@@ -30,12 +30,23 @@ const Profile = () => {
       let formattedSec = "";
       let formattedMin = "";
       let formattedHour = "";
+      let icon = "";
 
       hour < 10 ? (formattedHour = `0${hour}`) : (formattedHour = hour);
       min < 10 ? (formattedMin = `0${min}`) : (formattedMin = min);
       sec < 10 ? (formattedSec = `0${sec}`) : (formattedSec = sec);
 
-      const Time = `${formattedHour}:${formattedMin}:${formattedSec}`;
+      if (hour < 12 && hour > 6) {
+        icon = "🌅";
+      } else if (hour == 12 && horu < 17) {
+        icon = "☀️";
+      } else if (hour > 17 && hour < 21) {
+        icon = "🌇";
+      } else if (hour > 21 && hour < 6) {
+        icon = "🌙";
+      }
+
+      const Time = `${formattedHour}:${formattedMin}:${formattedSec} ${icon}`;
 
       setTime(() => Time);
     };
