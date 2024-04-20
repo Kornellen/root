@@ -21,7 +21,7 @@ const registryUser = (req, res) => {
   console.log("[REGISTRY]:".yellow + " Registry attempt ⚠️".yellow);
 
   const newUser = new User(username, email, password, uid);
-  const sql = `insert into logins values (?, ?, ?, ?)`;
+  const sql = `insert into logins(userID, username, email, password) values (?, ?, ?, ?)`;
 
   con.query(
     sql,

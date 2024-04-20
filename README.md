@@ -9,7 +9,7 @@ React and Node.JS - Backend and Frontend Project is a React app with Node.JS API
 1. Clone GitHub repo to your computer using **git clone**
 2. Run **npm install** in frontend/ and backend/server folders to install all of used dependencies
 3. Using MySQL import database from file _backend/database_
-4. In filie _backend/server/config/email.js_ change service: "", email: "" and in pass object put your app password
+4. In filie _backend/server/config/email.js_ change email: "" and in pass object put your app password
 
 ## Running
 

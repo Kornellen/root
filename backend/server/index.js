@@ -11,6 +11,7 @@ const uidtouserRoute = require("./routes/uidtouser");
 const updateRoute = require("./routes/updateUser");
 const dataRoute = require("./routes/userdata");
 const usertouidRoute = require("./routes/usertouid");
+const verifyRoute = require("./routes/verifyUser");
 
 const app = express();
 const port = 5175;
@@ -26,6 +27,7 @@ const routes = [
   updateRoute,
   dataRoute,
   usertouidRoute,
+  verifyRoute,
 ];
 
 app.use("/api", routes);
